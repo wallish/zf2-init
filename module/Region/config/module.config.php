@@ -52,14 +52,17 @@ return array(
             ),
         ),
     ),
+    
     'service_manager' => array(
         'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
+            //'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+           // 'Zend\Log\LoggerAbstractServiceFactory',
+           // 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
+
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -99,4 +102,5 @@ return array(
             ),
         ),
     ),
+
 );

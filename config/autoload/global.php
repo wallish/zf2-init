@@ -12,5 +12,13 @@
  */
 
 return array(
-    // ...
+     'db' => array(
+      'driver'         => 'Pdo',
+      'dsn'            => 'mysql:dbname=zf2-init;host=localhost;',
+      'username'       => "root", //here I added my valid username 
+      'password'       => "", //here I added my valid password
+      'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ), 
+   ),
 );

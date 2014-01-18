@@ -55,9 +55,9 @@ return array(
     
     'service_manager' => array(
         'abstract_factories' => array(
-            //'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-           // 'Zend\Log\LoggerAbstractServiceFactory',
-           // 'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+            'Zend\Log\LoggerAbstractServiceFactory',
+           //'Zend\Db\Adapter\AdapterServiceFactory',
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',

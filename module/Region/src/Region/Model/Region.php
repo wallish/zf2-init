@@ -1,7 +1,7 @@
-<?
+<?php
 namespace Region\Model;
-use Zend\Db\ResultSet\Row;
-class Region extends Row
+
+class Region 
 {
     public $RegionId;
     public $RegionLabel;

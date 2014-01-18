@@ -1,12 +1,12 @@
 <?php
 namespace Region;
+use Region\Model\RegionsTable;
 
-use Region\Model\RegionTable;
-use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module 
+
+class Module
 {
 
     public function onBootstrap(MvcEvent $e)
@@ -36,11 +36,13 @@ class Module
 
  public function getServiceConfig()
     {
+
         return array(
             'factories' => array(
-                'Region\Model\RegionTable' =>  function($sm) {
+                'Region\Model\RegionsTable' =>  function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $table     = new RegionTable($dbAdapter);
+                    $table = new RegionsTable($dbAdapter);
+                    //$table = new \Region\Model\RegionTable($dbAdapter);
                     return $table;
                 },
             ),

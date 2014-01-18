@@ -5,7 +5,7 @@ namespace Region\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
-use Region\Model\RegionTable;
+use Region\Model\RegionsTable;
 
 class IndexController extends AbstractActionController
 {
@@ -16,31 +16,62 @@ class IndexController extends AbstractActionController
     {
         if (!$this->table) {
             $sm = $this->getServiceLocator();
-            $this->table = $sm->get('Region\Model\RegionTable');
+            $this->table = $sm->get('Region\Model\RegionsTable');
         }
+
         return $this->table;
     }
 
     public function indexAction()
     {
-        $data = $this->getTable();  
-        die(var_dump($data));
-        return new ViewModel();
+        $data = $this->getTable()->select() ;   
+
+
+        foreach ($data as $row) {
+            echo $row->RegionLabel . PHP_EOL;
+        }
+
+        return new ViewModel(
+            array(
+                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
+                'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
+            )
+        );
+        
     }
 
     public function addAction()
     {
-        return new ViewModel();
+        
+
+        return new ViewModel(
+            array(
+                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
+                'action' => $this->getEvent()->getRouteMatch()->getParam('action')
+            )
+        );
     }
 
     public function editAction()
     {
-        return new ViewModel();
+        
+
+        return new ViewModel(
+            array(
+                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
+                'action' => $this->getEvent()->getRouteMatch()->getParam('action')
+            )
+        );
     }
 
     public function deleteAction()
     {
-        return new ViewModel();
+        return new ViewModel(
+            array(
+                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
+                'action' => $this->getEvent()->getRouteMatch()->getParam('action')
+            )
+        );
     }
 
 

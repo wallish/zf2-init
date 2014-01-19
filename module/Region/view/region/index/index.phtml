@@ -3,4 +3,17 @@
 echo "Controller : ".$this->controller; 
 echo "<br />";
 echo "Action : ".$this->action; 
+
+
+echo "<table>";
+echo "<th><td>id</td<td>label</td><td>poid</td></th>";
+foreach ($this->result as $row) {
+	echo "<tr onclick=window.location.href='/region/index/delete/$row->_regionId';>";
+    echo "<td>".$row->_regionId . "</td>";
+    echo "<td>".$row->_regionLabel . "</td>";
+    echo "<td>".$row->_regionWeight . "</td>";
+    echo "<td>".$row->_regionWeight . "</td>";
+    echo "</tr>";
+}
+echo "</table>"
 ?>

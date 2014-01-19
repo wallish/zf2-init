@@ -3,4 +3,17 @@
 echo "Controller : ".$this->controller; 
 echo "<br />";
 echo "Action : ".$this->action; 
+
+
+
+$form = $this->form;
+$form->setAttribute('action', '');
+$form->prepare();
+
+echo $this->form()->openTag($form);                 // Ouverture de la balise form
+echo $this->formHidden($form->get('RegionId'));  // Champ caché id_category
+echo $this->formRow($form->get('RegionLabel'));            // Champ nom
+echo $this->formRow($form->get('RegionWeight'));            // Champ nom
+echo $this->formSubmit($form->get('submit'));       // Bouton submit
+echo $this->form()->closeTag(); 
 ?>

@@ -29,4 +29,15 @@ return array(
                     => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
     ),
+      'routes' => array(
+        'paginator' => array(
+            'type' => 'segment',
+            'options' => array(
+                'route' => '/list/[page/:page]',
+                'defaults' => array(
+                    'page' => 1,
+                ),
+            ),
+        ),
+    ),
 );

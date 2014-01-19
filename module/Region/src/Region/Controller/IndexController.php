@@ -8,6 +8,7 @@ use Zend\View\Model\ViewModel;
 use Region\Model\RegionsTable;
 use Region\Form\RegionForm;
 use Region\Model\Region;
+use Zend\Tag\Cloud;
 
 class IndexController extends AbstractActionController
 {
@@ -27,14 +28,32 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         $data = $this->getTable()->fetchEntries();
+
+        foreach ($data as $row) {
+             $foo['title'] = $row->_regionLabel;
+             $foo['weight'] = $row->_regionWeight;
+             $foo['params'] = array('url' => '/tag/'.$row->_regionLabel);
+
+             $tagArray[] = $foo;    
+
+
+        }
+        
+        $cloud = new Cloud(array('tags' => $tagArray));
+
+        $data = $this->getTable()->fetchEntries();
         //var_dump($data);
   
+        /*$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($tagArray));
 
+        $paginator->setCurrentPageNumber($this->params()->fromRoute('page'));*/
         return new ViewModel(
             array(
                 'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
                 'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
-                'result' => $data
+                'result' => $data,
+                'tag' => $cloud,
+               // 'paginator', $paginator
                 
             )
         );

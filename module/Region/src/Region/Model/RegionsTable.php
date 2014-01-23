@@ -4,6 +4,10 @@ namespace Region\Model;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Paginator\Adapter\DbSelect;
+use Zend\Db\Sql\Select;
+use Zend\Paginator\Paginator;
+
 
 class RegionsTable extends AbstractTableGateway
 {
@@ -32,15 +36,26 @@ class RegionsTable extends AbstractTableGateway
         return $row;
     }
 
+      public function getMovies($array = null)
+    {
+        $select = new Select();
+        $select->from($this->table);
+        //$select->limit($limit);
+
+        return new \Zend\Paginator\Paginator(
+            new \Zend\Paginator\Adapter\DbSelect($select, $this->adapter, $this->resultSetPrototype)
+        );
+    }
+
     public function fetchEntries($filter = null)
     {
         return $this->select($filter);
     }
 
-    public function delete($id)
+    public function delete2($id)
     {
         if (!$id) return null;
-        $this->delete(array('RegionId' => $id));
+        return $this->delete(array('RegionId' => $id));
     }
 
     public function save(Region $region)

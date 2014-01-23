@@ -38,6 +38,21 @@ class IndexController extends AbstractActionController
 
 
         }
+
+        
+          //  $data = $this->getTable()->getMovies();
+
+         $paginator = $this->getTable()->getMovies();
+         // set the current page to what has been passed in query string, or to 1 if none set
+         $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+         // set the number of items per page to 10
+         $paginator->setItemCountPerPage(1);
+
+    
+
+
+
+     
         
         $cloud = new Cloud(array('tags' => $tagArray));
 
@@ -53,6 +68,7 @@ class IndexController extends AbstractActionController
                 'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
                 'result' => $data,
                 'tag' => $cloud,
+                'paginator' => $paginator,
                // 'paginator', $paginator
                 
             )
@@ -104,11 +120,12 @@ class IndexController extends AbstractActionController
 
     public function deleteAction()
     {
-        $id = $this->params()->fromQuery('delete');
+        //$id = $this->params()->fromQuery('delete');
+        $id = $this->getEvent()->getRouteMatch()->getParams('delete');
+        die(var_dump($id));
+        $data = $this->getTable()->delete2($id['id']);
 
-        die(var_dump($this->params()));
-
-        $data = $this->getTable()->delete();
+        $this->redirect()->toRoute('region');
         return new ViewModel(
             array(
                 'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),

@@ -46,6 +46,7 @@ class Module
                     return $table;
                 },
             ),
+            
         );
 
     }

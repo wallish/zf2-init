@@ -1,10 +1,21 @@
 
 <?php 
+
+
+var_dump($this->url('region',array('action' => 'add', 'id' => 2)));
+
+
+
+
+
+
+
+
 echo "Controller : ".$this->controller; 
 echo "<br />";
 echo "Action : ".$this->action; 
 
-
+/*
 echo "<table>";
 echo "<th><td>id</td<td>label</td><td>poid</td></th>";
 foreach ($this->result as $row) {
@@ -13,9 +24,43 @@ foreach ($this->result as $row) {
     echo "<td>".$row->_regionLabel . "</td>";
     echo "<td>".$row->_regionWeight . "</td>";
     echo "<td>".$row->_regionWeight . "</td>";
+    echo "<td><input onclick=window.location.href='/region/index/delete/$row->_regionId' type='button' name='delete' value='delete'/></td>";
     echo "</tr>";
 }
 echo "</table>";
-
+*/
 echo $this->tag;
 ?>
+
+
+ <table class="table">
+     <tr>
+     	 <th>Region Id</th>
+         <th>Region Label</th>
+         <th>Region Weight</th>
+         <th>&nbsp;</th>
+     </tr>
+     <?php foreach ($this->paginator as $album) : // <-- change here! ?>
+         <tr>
+          <td><?php echo $this->escapeHtml($album->_regionId);?></td>
+             <td><?php echo $this->escapeHtml($album->_regionLabel);?></td>
+             <td><?php echo $this->escapeHtml($album->_regionWeight);?></td>
+             
+         </tr>
+     <?php endforeach; ?>
+ </table>
+
+ <?php/*
+  echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'sliding',
+     // the partial to use to render the control
+     array('paginator/list.phtml', 'region'),
+     // the route to link to when a user clicks a control link
+     array(
+         'route' => 'region'
+     )
+ );
+  */?>

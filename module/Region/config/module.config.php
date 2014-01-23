@@ -20,14 +20,25 @@ return array(
                     ),
                 ),
             ),
+            'add' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/',
+                    'defaults' => array(
+                        'controller' => 'Region\Controller\Index',
+                        'action'     => 'add',
+                    ),
+                ),
+            ),
+
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
             'region' => array(
-                'type'    => 'Literal',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/region',
+                    'route'    => '/region/[:controller[/:action]][/:id]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Region\Controller',
                         'controller'    => 'Index',

@@ -54,5 +54,19 @@
                     'id' => 'submit',      // et l'id
                 ),
             ));
+            /*$this->add(array(     
+    'type' => 'Zend\Form\Element\Select',       
+    'name' => 'usernames',
+    'attributes' =>  array(
+        'id' => 'usernames',                
+        'options' => array(
+            'test' => 'Hi, Im a test!',
+            'Foo' => 'Bar',
+        ),
+    ),
+    'options' => array(
+        'label' => 'User Name',
+    ),
+)); */   
         }
     }

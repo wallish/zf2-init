@@ -50,17 +50,4 @@ echo $this->tag;
      <?php endforeach; ?>
  </table>
 
- <?php/*
-  echo $this->paginationControl(
-     // the paginator object
-     $this->paginator,
-     // the scrolling style
-     'sliding',
-     // the partial to use to render the control
-     array('paginator/list.phtml', 'region'),
-     // the route to link to when a user clicks a control link
-     array(
-         'route' => 'region'
-     )
- );
-  */?>
+<?php echo $this->paginationControl($this->paginator, 'Sliding','partial/pagination', array('route' => 'region')); ?>

@@ -36,7 +36,7 @@ class RegionsTable extends AbstractTableGateway
         return $row;
     }
 
-      public function getMovies($array = null)
+      public function getData($array = null)
     {
         $select = new Select();
         $select->from($this->table);

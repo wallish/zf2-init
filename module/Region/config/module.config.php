@@ -30,6 +30,16 @@ return array(
                     ),
                 ),
             ),
+           /* 'paginator' => array(
+                  'type' => 'segment',
+                  'options' => array(
+                      'route' => '[/:page]',
+                      'defaults' => array(
+                          'page' => 1,
+                      ),
+                  ),
+            ),*/
+
 
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
@@ -43,6 +53,7 @@ return array(
                         '__NAMESPACE__' => 'Region\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
+                        'page' => 1,
                     ),
                 ),
                 'may_terminate' => true,
@@ -105,6 +116,7 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+             'region/partial/pagination' => __DIR__ . '/../view/region/partial/pagination.phtml',
         ),
     ),
     // Placeholder for console routes

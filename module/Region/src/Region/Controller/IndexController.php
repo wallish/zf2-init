@@ -39,21 +39,20 @@ class IndexController extends AbstractActionController
 
         }
 
-        
+            //On définit la vue du paginator
+            //PaginationControl::setDefaultViewPartial('pagination/list.phtml');
           //  $data = $this->getTable()->getMovies();
 
-         $paginator = $this->getTable()->getMovies();
-         // set the current page to what has been passed in query string, or to 1 if none set
+         //echo $_GET['page'];
+         $paginator = $this->getTable()->getData();
          $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
-         // set the number of items per page to 10
+       //  $paginator->setCurrentPageNumber($this->params()->fromRoute(1));
          $paginator->setItemCountPerPage(1);
 
-    
-
-
+        
 
      
-        
+            
         $cloud = new Cloud(array('tags' => $tagArray));
 
         $data = $this->getTable()->fetchEntries();

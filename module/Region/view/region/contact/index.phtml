@@ -1,0 +1,16 @@
+Action "index", controller "Contact", module "region".
+<?php
+$form = $this->form;
+$form->prepare();
+
+echo $this->form()->openTag($form);                 // Ouverture de la balise form
+echo $this->formHidden($form->get('ContactId'));  // Champ caché id_category
+echo $this->formRow($form->get('ContactPhone')).'<br />';            // Champ nom
+echo $this->formRow($form->get('ContactMail')).'<br />';  
+   
+echo '<span style="width:10px;height:10px">'.$this->formRow($form->get('captcha')).'</span><br />';            // Champ nom
+
+echo $this->formSubmit($form->get('submit'));       // Bouton submit
+echo $this->form()->closeTag(); 
+
+?>

@@ -47,7 +47,7 @@ class IndexController extends AbstractActionController
          $paginator = $this->getTable()->getData();
          $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
        //  $paginator->setCurrentPageNumber($this->params()->fromRoute(1));
-         $paginator->setItemCountPerPage(1);
+         $paginator->setItemCountPerPage(2);
 
         
 
@@ -68,6 +68,7 @@ class IndexController extends AbstractActionController
                 'result' => $data,
                 'tag' => $cloud,
                 'paginator' => $paginator,
+                'route' => 'region',
                // 'paginator', $paginator
                 
             )

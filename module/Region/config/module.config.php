@@ -20,7 +20,7 @@ return array(
                     ),
                 ),
             ),
-            'add' => array(
+            /*'add' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/',
@@ -29,18 +29,30 @@ return array(
                         'action'     => 'add',
                     ),
                 ),
-            ),
-           /* 'paginator' => array(
+            ),*/
+
+            'paginator' => array(
                   'type' => 'segment',
                   'options' => array(
-                      'route' => '[/:page]',
+                      'route' => '/region/index/index[/:page]',
                       'defaults' => array(
                           'page' => 1,
                       ),
                   ),
-            ),*/
+            ),
 
-
+            'contact' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/region/[:controller[/:action]][/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Region\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'index',
+                        'page' => 1,
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -48,7 +60,7 @@ return array(
             'region' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/region/[:controller[/:action]][/:id]',
+                    'route'    => '/region/[:controller[/:action]][/:id][/:page]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Region\Controller',
                         'controller'    => 'Index',
@@ -71,6 +83,31 @@ return array(
                             ),
                         ),
                     ),
+                   /* 'contactCaptcha' => array(
+                                'type'    => 'segment',
+                                'options' => array(
+                                    'route'    => '/[:action[/]]',
+                                     'constraints' => array(
+                                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                    ),
+                                        'defaults' => array(
+                                            'action' => 'index',                     
+                                        ),
+                                ),
+                    ),
+                    'captchaImage' => array(
+                        'type'    => 'segment',
+                        'options' => array(
+                            'route'    =>  '/captcha/[:id]',
+                             'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'controller',
+                                'action'     => 'generate',
+                             ),
+                        ),
+                    ),*/
                 ),
             ),
         ),
@@ -97,9 +134,12 @@ return array(
             ),
         ),
     ),
+
+
     'controllers' => array(
         'invokables' => array(
-            'Region\Controller\Index' => 'Region\Controller\IndexController'
+            'Region\Controller\Index' => 'Region\Controller\IndexController',
+            'Region\Controller\Contact' => 'Region\Controller\ContactController'
         ),
     ),
     'view_manager' => array(

@@ -1,6 +1,7 @@
 <?php
 namespace Region;
 use Region\Model\RegionsTable;
+use Region\Model\ContactTable;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -42,6 +43,13 @@ class Module
                 'Region\Model\RegionsTable' =>  function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new RegionsTable($dbAdapter);
+                    //$table = new \Region\Model\RegionTable($dbAdapter);
+                    return $table;
+                },
+
+                'Region\Model\ContactTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new ContactTable($dbAdapter);
                     //$table = new \Region\Model\RegionTable($dbAdapter);
                     return $table;
                 },

@@ -240,6 +240,7 @@
 2014-02-06T16:38:30+00:00 INFO (6): Controller :Region\Controller\Index - Action : index
 2014-02-06T16:38:32+00:00 INFO (6): Controller :Index - Action : tag
 2014-02-06T16:38:35+00:00 INFO (6): Controller :Contact - Action : index
+<<<<<<< HEAD
 2014-02-06T16:59:40+00:00 INFO (6): Controller :index - Action : index
 2014-02-06T16:59:56+00:00 INFO (6): Controller :index - Action : index
 2014-02-06T17:00:01+00:00 INFO (6): Controller :Index - Action : page
@@ -267,3 +268,14 @@
 2014-02-06T17:04:18+00:00 INFO (6): Controller :Index - Action : index
 2014-02-06T17:04:21+00:00 INFO (6): Controller :Index - Action : tag
 2014-02-06T17:04:41+00:00 INFO (6): Controller :Index - Action : tag
+=======
+2014-02-06T16:54:50+00:00 INFO (6): Controller :Region\Controller\Index - Action : index
+2014-02-06T16:54:51+00:00 INFO (6): Controller :Index - Action : tag
+2014-02-06T16:54:52+00:00 INFO (6): Controller :Contact - Action : index
+2014-02-06T16:54:54+00:00 INFO (6): Controller :index - Action : index
+2014-02-06T16:54:54+00:00 INFO (6): Controller :Region\Controller\Index - Action : index
+2014-02-06T16:54:58+00:00 INFO (6): Controller :Region\Controller\Index - Action : index
+2014-02-06T16:54:59+00:00 INFO (6): Controller :index - Action : index
+2014-02-06T16:55:01+00:00 INFO (6): Controller :Index - Action : tag
+2014-02-06T16:55:02+00:00 INFO (6): Controller :Contact - Action : index
+>>>>>>> 094f3df981d3e63d3d9f1fa42117ea24aba91ef5

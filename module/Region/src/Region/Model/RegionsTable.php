@@ -68,8 +68,8 @@ class RegionsTable extends AbstractTableGateway
 
         if ($data['RegionId'] == 0) {
             $this->insert($data);
-        } elseif ($this->fetchEntry($data['RegionId'])) {
-            $this->update($data,array('Region' => $data['RegionId']));
+        } elseif ($this->fetchEntry(array('RegionId' => $data['RegionId']))) {
+            $this->update($data,array('RegionId' => $data['RegionId']));
             $result = array('code' => 'SUCCESS_UPDATE', 'id' => $data['RegionId'], 'messages' => array());
         } else {
             //$result = array('code' => 'FAILURE_NOT_UNIQUE', 'id' => $data['RegionId'], 'messages' => array($e->getMessage()));

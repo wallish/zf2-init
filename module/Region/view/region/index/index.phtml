@@ -1,13 +1,5 @@
 
-<?php 
-
-echo "Controller : ".$this->controller; 
-echo "<br />";
-echo "Action : ".$this->action; 
-
-echo $this->tag;
-?>
-
+<a href="<?php echo $this->url('region',array('controller'=>'Index', 'action'=>'add')) ?>"><?php echo "Ajouter" ?></a>
 
  <table class="table">
      <tr>
@@ -16,11 +8,13 @@ echo $this->tag;
          <th>Region Weight</th>
          <th>&nbsp;</th>
      </tr>
-     <?php foreach ($this->paginator as $album) : // <-- change here! ?>
+     <?php foreach ($this->paginator as $region) : ?>
          <tr>
-          <td><?php echo $this->escapeHtml($album->_regionId);?></td>
-             <td><?php echo $this->escapeHtml($album->_regionLabel);?></td>
-             <td><?php echo $this->escapeHtml($album->_regionWeight);?></td>
+          <td><?php echo $this->escapeHtml($region->_regionId);?></td>
+             <td><?php echo $this->escapeHtml($region->_regionLabel);?></td>
+             <td><?php echo $this->escapeHtml($region->_regionWeight);?></td>
+             <td><a href="<?php echo $this->url('region',array('controller'=>'Index', 'action'=>'edit','id'=> $region->_regionId)) ?>"><?php echo "edit" ?></a></td>
+             <td><a href="<?php echo $this->url('region',array('controller'=>'Index', 'action'=>'delete','id'=> $region->_regionId)) ?>"><?php echo "delete" ?></a></td>
              
          </tr>
      <?php endforeach; ?>

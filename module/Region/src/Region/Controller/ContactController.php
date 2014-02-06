@@ -26,6 +26,8 @@ class ContactController extends AbstractActionController
     public function indexAction()
     {
     	$form = new ContactForm();
+
+        //var_dump($this->getEvent()->getRouteMatch());
         //$form = new ContactForm($this->getRequest()->getBaseUrl().APPLICATION_PATH.'/data/captcha');
 
         $request = $this->getRequest();
@@ -44,40 +46,12 @@ class ContactController extends AbstractActionController
         }
         return new ViewModel(
         	  array(
-                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
-                'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
+             //   'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
+              //  'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
                 'form' => $form,
             )
     	);
     }
-/*
-public function generateAction()
-{
-    $response = $this->getResponse();
-    $response->getHeaders()->addHeaderLine('Content-Type', "image/png");
-
-    $id = $this->params('id', false);
-
-    if ($id) {
-
-        $image = './data/captcha/' . $id;
-
-        if (file_exists($image) !== false) {
-            $imagegetcontent = @file_get_contents($image);
-
-            $response->setStatusCode(200);
-            $response->setContent($imagegetcontent);
-
-            if (file_exists($image) == true) {
-                unlink($image);
-            }
-        }
-
-    }
-
-    return $response;
-}
-*/
 
 }
 

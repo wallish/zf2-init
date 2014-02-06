@@ -12,9 +12,15 @@ class Module
 
     public function onBootstrap(MvcEvent $e)
     {
+
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $eventManager        = $e->getApplication()->getEventManager();
+        $eventManager->attach('route', array($this, 'loadConfiguration')); 
+       // var_dump($e->getEvent()->getRouteMatch());
+       // var_dump( $e->getRouteMatch());
     }
 
 
@@ -35,7 +41,7 @@ class Module
         );
     }
 
- public function getServiceConfig()
+    public function getServiceConfig()
     {
 
         return array(
@@ -58,4 +64,23 @@ class Module
         );
 
     }
+
+    public function loadConfiguration(MvcEvent $e)
+    {
+        $application   = $e->getApplication();
+        $sm            = $application->getServiceManager();
+        $sharedManager = $application->getEventManager()->getSharedManager();
+        $router = $sm->get('router');
+        $request = $sm->get('request');
+        $matchedRoute = $router->match($request);
+        if (null !== $matchedRoute) {
+            // I get module name instead of the controller name
+            //$this->layout()->username = "tata";
+            $e->getViewModel()->setVariable('controller', $matchedRoute->getParam('controller'));
+            $e->getViewModel()->setVariable('action', $matchedRoute->getParam('action'));
+            //var_dump($matchedRoute->getParam('controller'));
+           // var_dump($matchedRoute->getParam('action'));
+           // do something
+        }
+    } 
 }

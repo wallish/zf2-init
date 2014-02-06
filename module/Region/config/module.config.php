@@ -83,31 +83,6 @@ return array(
                             ),
                         ),
                     ),
-                   /* 'contactCaptcha' => array(
-                                'type'    => 'segment',
-                                'options' => array(
-                                    'route'    => '/[:action[/]]',
-                                     'constraints' => array(
-                                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                    ),
-                                        'defaults' => array(
-                                            'action' => 'index',                     
-                                        ),
-                                ),
-                    ),
-                    'captchaImage' => array(
-                        'type'    => 'segment',
-                        'options' => array(
-                            'route'    =>  '/captcha/[:id]',
-                             'constraints' => array(
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'controller',
-                                'action'     => 'generate',
-                             ),
-                        ),
-                    ),*/
                 ),
             ),
         ),

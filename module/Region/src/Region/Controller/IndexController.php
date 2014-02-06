@@ -29,15 +29,7 @@ class IndexController extends AbstractActionController
     {
         $data = $this->getTable()->fetchEntries();
 
-        foreach ($data as $row) {
-             $foo['title'] = $row->_regionLabel;
-             $foo['weight'] = $row->_regionWeight;
-             $foo['params'] = array('url' => '/tag/'.$row->_regionLabel);
-
-             $tagArray[] = $foo;    
-
-
-        }
+      
 
             //On définit la vue du paginator
             //PaginationControl::setDefaultViewPartial('pagination/list.phtml');
@@ -53,7 +45,6 @@ class IndexController extends AbstractActionController
 
      
             
-        $cloud = new Cloud(array('tags' => $tagArray));
 
         $data = $this->getTable()->fetchEntries();
         //var_dump($data);
@@ -66,7 +57,6 @@ class IndexController extends AbstractActionController
                 'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
                 'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
                 'result' => $data,
-                'tag' => $cloud,
                 'paginator' => $paginator,
                 'route' => 'region',
                // 'paginator', $paginator
@@ -108,8 +98,42 @@ class IndexController extends AbstractActionController
 
     public function editAction()
     {
-        
+        $id = $this->getEvent()->getRouteMatch()->getParams('edit');
+        $data = $this->getTable()->fetchEntry(array('RegionId' => $id['id']));
 
+        $form = new RegionForm();
+        $form->setData(array('RegionId' => $data->_regionId,'RegionLabel' => $data->_regionLabel,'RegionWeight' => $data->_regionWeight));
+        // On récupère l'objet Request
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $region = new Region();
+            $form->setInputFilter($region->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $region->exchangeArray($form->getData());
+                $this->getTable()->save($region);
+                // Redirect to list of albums
+                return $this->redirect()->toRoute('region');
+            }
+        }
+        //$data = $this->getTable()->delete2($id['id']);
+
+        return new ViewModel(
+            array(
+                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
+                'action' => $this->getEvent()->getRouteMatch()->getParam('action'),
+                'form' => $form,
+            )
+        );
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->getEvent()->getRouteMatch()->getParams('delete');
+        $data = $this->getTable()->delete2($id['id']);
+        $this->redirect()->toRoute('region');
         return new ViewModel(
             array(
                 'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
@@ -118,18 +142,21 @@ class IndexController extends AbstractActionController
         );
     }
 
-    public function deleteAction()
-    {
-        //$id = $this->params()->fromQuery('delete');
-        $id = $this->getEvent()->getRouteMatch()->getParams('delete');
-        die(var_dump($id));
-        $data = $this->getTable()->delete2($id['id']);
+    public function tagAction(){
 
-        $this->redirect()->toRoute('region');
+        $data = $this->getTable()->fetchEntries();
+
+        foreach ($data as $row) {
+             $foo['title'] = $row->_regionLabel;
+             $foo['weight'] = $row->_regionWeight;
+             $foo['params'] = array('url' => '/index/tag/'.$row->_regionLabel);
+
+             $tagArray[] = $foo;    
+        }
+        $cloud = new Cloud(array('tags' => $tagArray));
         return new ViewModel(
             array(
-                'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
-                'action' => $this->getEvent()->getRouteMatch()->getParam('action')
+                'tag' => $cloud,
             )
         );
     }

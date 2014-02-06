@@ -67,7 +67,7 @@ return array(
                         '__NAMESPACE__' => 'Region\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
-                        'page' => 1,
+                        'page' => 2,
                     ),
                 ),
                 'may_terminate' => true,

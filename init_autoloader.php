@@ -18,12 +18,14 @@
 
 // Composer autoloading
 if (file_exists('vendor/autoload.php')) {
+    //echo "ok";
     $loader = include 'vendor/autoload.php';
 }
 
 $zf2Path = false;
 
 if (is_dir('vendor/ZF2/library')) {
+    // echo "ok";
     $zf2Path = 'vendor/ZF2/library';
 } elseif (getenv('ZF2_PATH')) {      // Support for ZF2_PATH environment variable or git submodule
     $zf2Path = getenv('ZF2_PATH');

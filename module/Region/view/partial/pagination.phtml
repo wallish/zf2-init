@@ -23,7 +23,7 @@
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url($this->route, array('page' => $this->next)); ?>">
+  <a href="<?php echo $this->url($this->route, array('action' => 'page', 'id' => $this->next)); ?>">
     Next &gt;
   </a>
 <?php else: ?>

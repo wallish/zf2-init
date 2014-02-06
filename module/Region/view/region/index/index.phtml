@@ -20,4 +20,24 @@
      <?php endforeach; ?>
  </table>
 
-<?php echo $this->paginationControl($this->paginator, 'Sliding','partial/pagination', array('route' => 'region')); ?>
+<?php
+echo $this->paginationControl(
+    // the paginator object
+    $this->paginator,
+    // the scrolling style; see http://zf2.readthedocs.org/en/release-2.1.4/modules/zend.paginator.usage.html#rendering-pages-with-view-scripts
+    'sliding',
+    // the partial to use to render the control
+    array('partial/pagination.phtml', 'Region'),
+    // the route to link to when a user clicks a control link
+    array(
+        'route' => 'region'
+    )
+);
+?>
+<h2>Images flickr :</h2>
+<hr/>
+<?php
+    foreach($this->photos as $photo){
+        echo "<img src='http://farm".$photo['farm'].".staticflickr.com/".$photo['server']."/".$photo['id']."_".$photo['secret'].".jpg' />";
+    }
+?>

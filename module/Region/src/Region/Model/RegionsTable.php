@@ -40,11 +40,24 @@ class RegionsTable extends AbstractTableGateway
     {
         $select = new Select();
         $select->from($this->table);
-        //$select->limit($limit);
-
-        return new \Zend\Paginator\Paginator(
-            new \Zend\Paginator\Adapter\DbSelect($select, $this->adapter, $this->resultSetPrototype)
+        // create a new result set based on the Album entity
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new Region());
+        // create a new pagination adapter object
+        $paginatorAdapter = new DbSelect(
+            // our configured select object
+            $select,
+            // the adapter to run it against
+            $this->adapter,
+            // the result set to hydrate
+            $resultSetPrototype
         );
+        $paginator = new Paginator($paginatorAdapter);
+        return $paginator;
+
+        /*return new \Zend\Paginator\Paginator(
+            new \Zend\Paginator\Adapter\DbSelect($select, $this->adapter, $this->resultSetPrototype)
+        );*/
     }
 
     public function fetchEntries($filter = null)

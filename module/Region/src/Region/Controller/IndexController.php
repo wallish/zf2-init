@@ -10,6 +10,10 @@ use Region\Form\RegionForm;
 use Region\Model\Region;
 use Zend\Tag\Cloud;
 require_once ('./config/spyc-master/Spyc.php');
+use ZendService\Flickr\Exception\ExceptionInterface as FlickrException;
+use ZendService\Flickr\Flickr;
+// use Zend\Config;
+
 class IndexController extends AbstractActionController
 {
     protected $table;
@@ -30,12 +34,25 @@ class IndexController extends AbstractActionController
 
         $data = $this->getTable()->fetchEntries();
         //var_dump($this->getEvent()->getRouteMatch()->getParams('page'));
+         //echo $_GET['page'];
+         $paginator = $this->getTable()->getData();
+         $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page'));
+       //  $paginator->setCurrentPageNumber($this->params()->fromRoute(1));
+         $paginator->setItemCountPerPage(1);
 
-        $paginator = $this->getTable()->getData();
-        $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
-        $paginator->setItemCountPerPage(2);
 
-        $data = $this->getTable()->fetchEntries();
+        // ==== flickr images
+        $flickr = new Flickr('5022e42055206da0291361166f1f3a80');
+        $results = $flickr->userSearch("yankss78@yahoo.fr");
+        $data   = simplexml_load_string($results);
+        $photos = $data->photos->photo;
+        // foreach($data->photos->photo as $photo){
+        //     echo "<img src='http://farm".$photo['farm'].".staticflickr.com/".$photo['server']."/".$photo['id']."_".$photo['secret'].".jpg' />";
+        // }
+        // var_dump($data->photos->photo[0]);
+        // var_dump($data->photos);
+        // echo "<img src='http://farm".$data->photos->photo[0]['farm'].".staticflickr.com/".$data->photos->photo[0]['server']."/".$data->photos->photo[0]['id']."_".$data->photos->photo[0]['secret'].".jpg' />";
+
   
         return new ViewModel(
             array(
@@ -44,6 +61,7 @@ class IndexController extends AbstractActionController
                 'result' => $data,
                 'paginator' => $paginator,
                 'route' => 'region',
+                'photos' => $photos,
                // 'paginator', $paginator
                 
             )

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <webhost>www.xml.com</webhost>
+    <database>
+        <adapter value="pdo_mysql"/>
+        <params>
+            <host value="localhost"/>
+            <username value="root"/>
+            <password value=""/>
+            <dbname value="zf2-init"/>
+        </params>
+    </database>
+</config>

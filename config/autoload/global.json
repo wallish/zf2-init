@@ -1,0 +1,12 @@
+{
+  "webhost"  : "www.json.com",
+  "database" : {
+    "adapter" : "pdo_mysql",
+    "params"  : {
+      "host"     : "localhost",
+      "username" : "root",
+      "password" : "",
+      "dbname"   : "zf2-init"
+    }
+  }
+}

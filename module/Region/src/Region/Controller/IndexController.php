@@ -9,7 +9,7 @@ use Region\Model\RegionsTable;
 use Region\Form\RegionForm;
 use Region\Model\Region;
 use Zend\Tag\Cloud;
-
+require_once ('./config/spyc-master/Spyc.php');
 class IndexController extends AbstractActionController
 {
     protected $table;
@@ -28,7 +28,6 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
 
-        $config = $this->getServiceLocator()->get('Config');
         $data = $this->getTable()->fetchEntries();
         //var_dump($this->getEvent()->getRouteMatch()->getParams('page'));
 
@@ -128,7 +127,8 @@ class IndexController extends AbstractActionController
         );
     }
 
-    public function tagAction(){
+    public function tagAction()
+    {
 
         $data = $this->getTable()->fetchEntries();
         if(count($data) != 0){
@@ -149,6 +149,42 @@ class IndexController extends AbstractActionController
                 'tag' => $cloud,
             )
         );
+    }
+
+    public function configAction(){
+
+        $type = "";
+        if(isset($_POST['type']) && $_POST['type'] == "ini"){
+            $reader = new \Zend\Config\Reader\Ini();
+            $data   = $reader->fromFile('./config/autoload/global.ini');
+
+            echo "<h2>File global.ini loaded</h2>";
+            var_dump($data);
+        }
+        if(isset($_POST['type']) &&$_POST['type'] == "xml"){
+            $reader = new \Zend\Config\Reader\Xml();
+            $data   = $reader->fromFile('./config/autoload/global.xml');
+            echo "<h2>File global.xml loaded</h2>";
+            var_dump($data);
+
+        }
+        if(isset($_POST['type']) &&$_POST['type'] == "json"){
+            $reader = new \Zend\Config\Reader\Json();
+            $data   = $reader->fromFile('./config/autoload/global.json');
+            echo "<h2>File global.json loaded</h2>";
+            var_dump($data);
+
+        }
+        if(isset($_POST['type']) &&$_POST['type'] == "yaml"){
+             
+            $reader = new \Zend\Config\Reader\Yaml(array('Spyc','YAMLLoadString'));
+            $data   = $reader->fromFile('./config/autoload/global.yaml');
+            echo "<h2>File global.yaml loaded</h2>";
+            var_dump($data);
+
+        }
+
+       
     }
 
 

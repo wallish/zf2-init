@@ -1,0 +1,7 @@
+<h2>Images flickr :</h2>
+<hr/>
+<?php
+    foreach($this->photos as $photo){
+        echo "<img src='http://farm".$photo['farm'].".staticflickr.com/".$photo['server']."/".$photo['id']."_".$photo['secret'].".jpg' />";
+    }
+?>

@@ -38,7 +38,7 @@ class IndexController extends AbstractActionController
          $paginator = $this->getTable()->getData();
          $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page'));
        //  $paginator->setCurrentPageNumber($this->params()->fromRoute(1));
-         $paginator->setItemCountPerPage(1);
+         $paginator->setItemCountPerPage(2);
 
 
         // ==== flickr images
@@ -203,6 +203,21 @@ class IndexController extends AbstractActionController
         }
 
        
+    }
+
+    public function flickrAction(){
+         // ==== flickr images
+        $flickr = new Flickr('5022e42055206da0291361166f1f3a80');
+        $results = $flickr->userSearch("yankss78@yahoo.fr");
+        $data   = simplexml_load_string($results);
+        $photos = $data->photos->photo;
+        return new ViewModel(
+            array(
+                'photos' => $photos,
+               // 'paginator', $paginator
+                
+            )
+        );
     }
 
 

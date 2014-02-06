@@ -17,9 +17,11 @@ return array(
                     'defaults' => array(
                         'controller' => 'Region\Controller\Index',
                         'action'     => 'index',
+                        'lang'          => 'en'
                     ),
                 ),
             ),
+           
             /*'add' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -145,6 +147,13 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                '/[:lang]/region',
+             'defaults' => array(
+                  '__NAMESPACE__' => 'Index\Controller',
+                  'controller'    => 'Index',
+                  'action'        => 'index',
+                  'lang'          => 'en'
+              ),
             ),
         ),
     ),

@@ -19,6 +19,8 @@ class Module
         
         $eventManager        = $e->getApplication()->getEventManager();
         $eventManager->attach('route', array($this, 'loadConfiguration')); 
+
+        
        // var_dump($e->getEvent()->getRouteMatch());
        // var_dump( $e->getRouteMatch());
     }
@@ -78,6 +80,12 @@ class Module
             //$this->layout()->username = "tata";
             $e->getViewModel()->setVariable('controller', $matchedRoute->getParam('controller'));
             $e->getViewModel()->setVariable('action', $matchedRoute->getParam('action'));
+
+            $writer = new \Zend\Log\Writer\Stream('log');
+            $logger = new \Zend\Log\Logger();
+            $logger->addWriter($writer);
+
+            $logger->info('Controller :'.$matchedRoute->getParam('controller'). ' - Action : '.$matchedRoute->getParam('action'));
             //var_dump($matchedRoute->getParam('controller'));
            // var_dump($matchedRoute->getParam('action'));
            // do something

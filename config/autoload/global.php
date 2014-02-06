@@ -22,13 +22,13 @@ return array(
         ), 
       
    ),
-      'service_manager' => array(
+      /*'service_manager' => array(
         'factories' => array(
              // le servicemanager Zend DB Adapter qui gére la connexion vers la db  
             'Zend\Db\Adapter\Adapter'
                     => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
-    ),
+    ),*/
     /*'routes' => array(
       'paginator' => array(
           'type' => 'segment',

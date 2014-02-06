@@ -27,31 +27,17 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
+
+        $config = $this->getServiceLocator()->get('Config');
         $data = $this->getTable()->fetchEntries();
+        //var_dump($this->getEvent()->getRouteMatch()->getParams('page'));
 
-      
-
-            //On définit la vue du paginator
-            //PaginationControl::setDefaultViewPartial('pagination/list.phtml');
-          //  $data = $this->getTable()->getMovies();
-
-         //echo $_GET['page'];
-         $paginator = $this->getTable()->getData();
-         $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
-       //  $paginator->setCurrentPageNumber($this->params()->fromRoute(1));
-         $paginator->setItemCountPerPage(2);
-
-        
-
-     
-            
+        $paginator = $this->getTable()->getData();
+        $paginator->setCurrentPageNumber((int) $this->params()->fromQuery('page', 1));
+        $paginator->setItemCountPerPage(2);
 
         $data = $this->getTable()->fetchEntries();
-        //var_dump($data);
   
-        /*$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($tagArray));
-
-        $paginator->setCurrentPageNumber($this->params()->fromRoute('page'));*/
         return new ViewModel(
             array(
                 'controller' => $this->getEvent()->getRouteMatch()->getParam('__CONTROLLER__'),
@@ -145,15 +131,19 @@ class IndexController extends AbstractActionController
     public function tagAction(){
 
         $data = $this->getTable()->fetchEntries();
+        if(count($data) != 0){
+            foreach ($data as $row) {
+                 $foo['title'] = $row->_regionLabel;
+                 $foo['weight'] = $row->_regionWeight;
+                 $foo['params'] = array('url' => '/index/tag/'.$row->_regionLabel);
 
-        foreach ($data as $row) {
-             $foo['title'] = $row->_regionLabel;
-             $foo['weight'] = $row->_regionWeight;
-             $foo['params'] = array('url' => '/index/tag/'.$row->_regionLabel);
-
-             $tagArray[] = $foo;    
+                 $tagArray[] = $foo;    
+            }
+            $cloud = new Cloud(array('tags' => $tagArray));
+        }else{
+            $cloud = null;
         }
-        $cloud = new Cloud(array('tags' => $tagArray));
+        
         return new ViewModel(
             array(
                 'tag' => $cloud,

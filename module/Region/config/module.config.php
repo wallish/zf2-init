@@ -34,7 +34,7 @@ return array(
             'paginator' => array(
                   'type' => 'segment',
                   'options' => array(
-                      'route' => '/region/index/index[/:page]',
+                      'route' => '/region/[page/:page]',
                       'defaults' => array(
                           'page' => 1,
                       ),
@@ -73,7 +73,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]][/:id]',
+                            'route'    => '/[:controller[/:action]][/:id][page/:page]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -88,6 +88,9 @@ return array(
         ),
     ),
     
+
+
+
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -96,6 +99,10 @@ return array(
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
+        ),
+         'factories' => array(
+             // le servicemanager Zend DB Adapter qui gére la connexion vers la db  
+            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
 
     ),
